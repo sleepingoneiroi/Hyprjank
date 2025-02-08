@@ -10,13 +10,11 @@ inline static const std::string DARK_MODE_FUNC = R"glsl(
 uniform bool doInvert;
 
 void invert(inout vec4 color) {
-    if (doInvert) {
-        // Invert Colors
-        color.rgb = vec3(1.) - vec3(.88, .9, .92) * color.rgb;
+    if (!doInvert) return;
 
-        // Invert Hue
-        color.rgb = dot(vec3(0.26312, 0.5283, 0.10488), color.rgb) * 2.0 - color.rgb;
-    }
+    if (color.r == 0 && color.g == 0 && color.b == 0)
+        color.rgba = vec4(0, 0, 0, 0);
+    
 }
 )glsl";
 
